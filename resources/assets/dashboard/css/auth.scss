@@ -1,0 +1,22 @@
+// Radio buttons styles
+input.auth--radio[type='radio'] {
+    display: none;
+}
+label.auth--radio {
+    position: relative;
+    background-color: #F3F6F9;
+    color: #B5B5C3 ;
+    border-radius: 5px;
+    padding: 10px 50px;
+}
+input[type='radio'].auth--radio:checked + label{
+    background-color: #B5B5C3;
+    color: #F3F6F9;
+}
+
+
+// Remove counter from input[type=number]
+input[counter='off']::-webkit-outer-spin-button,
+input[counter='off']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
