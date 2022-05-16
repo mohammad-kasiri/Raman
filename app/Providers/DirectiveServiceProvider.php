@@ -2,7 +2,8 @@
 
 namespace App\Providers;
 
-use Blade;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class DirectiveServiceProvider extends ServiceProvider

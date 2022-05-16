@@ -25,9 +25,43 @@ class PermissionTableSeeder extends Seeder
     public function patientPermissions () : array
     {
         return [
-            'id'   => 1 ,
-            'name' => 'patients' ,
-            'label'=> 'بیماران' ,
+            [
+                'id'       => 1 ,
+                'parent'   => null ,  // -- without parent -- //
+                'name'     => 'patients' ,
+                'label'    => 'بیماران'
+            ],
+            [
+                'id'       => 2 ,
+                'parent'   => 1 ,   //patients
+                'name'     => 'patients.index' ,
+                'label'    => 'مشاهده لیست بیماران'
+            ],
+            [
+                'id'       => 3 ,
+                'parent'   => 1 ,   //patients
+                'name'     => 'patients.create' ,
+                'label'    => 'افزودن بیمار جدید'
+            ],
+            [
+                'id'       => 4 ,
+                'parent'   => 1 ,   //patients
+                'name'     => 'patients.show' ,
+                'label'    => 'مشاهده ی اطلاعات بیمار'
+            ],
+            [
+                'id'       => 5 ,
+                'parent'   => 4 ,    //patients.show
+                'name'     => 'patients.edit' ,
+                'label'    => 'ویرایش اطلاعات بیمار'
+            ],
+            [
+                'id'       => 5 ,
+                'parent'   => 4 ,    //patients.show
+                'name'     => 'patients.session.index' ,
+                'label'    => 'نمایش لیست نشست های بیمار'
+            ],
+
         ];
     }
 }

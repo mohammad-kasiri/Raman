@@ -50,7 +50,7 @@
                         <tbody>
                         @foreach($patients as $key=>$patient)
                             <tr>
-                                <td class="text-center align-middle"> {{\App\Functions\PaginationCounter::item($patients , $key)}}</td>
+                                <td class="text-center align-middle"> {{\App\Functions\PaginationCounter::item($patients , $key)}} </td>
                                 <td class="text-center align-middle"> <img src="{{$patient->avatar()}}" width="40px"></td>
                                 <td class="text-center align-middle text-nowrap"> {{$patient->full_name}}</td>
                                 <td class="text-center align-middle"> <a href="tel:{{$patient->mobile}}">{{$patient->mobile}}</a> </td>
