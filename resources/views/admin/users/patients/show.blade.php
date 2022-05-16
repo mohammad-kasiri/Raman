@@ -90,8 +90,9 @@
                                     </span>
                                 </a>
                             </div>
-                            <div class="navi-item mb-2">
-                                <a  href="{{route('admin.patients.edit' , $patient->id)}}" class="navi-link py-4 ">
+                            @can('patients.edit')
+                                <div class="navi-item mb-2">
+                                    <a  href="{{route('admin.patients.edit' , $patient->id)}}" class="navi-link py-4 ">
                                     <span class="navi-icon mr-2">
                                         <span class="svg-icon">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/عمومی/User.svg-->
@@ -99,11 +100,13 @@
                                             <!--end::Svg Icon-->
                                         </span>
                                     </span>
-                                    <span class="navi-text font-size-lg">
+                                        <span class="navi-text font-size-lg">
                                         ویرایش کاربر
                                     </span>
-                                </a>
-                            </div>
+                                    </a>
+                                </div>
+                            @endcan
+                            @can('patients.session.index')
                             <div class="navi-item mb-2">
                                 <a href="custom/apps/profile/profile-1/account-information.html" class="navi-link py-4 ">
                                     <span class="navi-icon mr-2">
@@ -118,6 +121,7 @@
                                     </span>
                                 </a>
                             </div>
+                            @endcan
                             <div class="navi-item mb-2">
                                 <a href="custom/apps/profile/profile-1/account-information.html" class="navi-link py-4 ">
                                     <span class="navi-icon mr-2">
@@ -145,7 +149,8 @@
             <div class="flex-row-fluid ml-lg-8">
                 <!--begin::Row-->
                 <div class="row">
-                    <div class="col-lg-7">
+                    <div class="@can('patients.session.index') col-lg-7 @endcan
+                                @cannot('patients.session.index') col-lg-12 @endcannot">
                         <!--begin::لیست Widget 14-->
                         <div class="card card-custom card-stretch gutter-b">
                             <!--begin::Header-->
@@ -251,17 +256,18 @@
                         </div>
                         <!--end::لیست Widget 14-->
                     </div>
-                    <div class="col-lg-5">
-                        <!--begin::لیست Widget 10-->
-                        <div class="card card-custom  card-stretch gutter-b">
-                            <!--begin::Header-->
-                            <div class="card-header border-0">
-                                <h3 class="card-title font-weight-bolder text-dark">سابقه نشست ها</h3>
-                            </div>
-                            <!--end::Header-->
+                    @can('patients.session.index')
+                        <div class="col-lg-5">
+                            <!--begin::لیست Widget 10-->
+                            <div class="card card-custom  card-stretch gutter-b">
+                                <!--begin::Header-->
+                                <div class="card-header border-0">
+                                    <h3 class="card-title font-weight-bolder text-dark">سابقه نشست ها</h3>
+                                </div>
+                                <!--end::Header-->
 
-                            <!--begin::Body-->
-                            <div class="card-body pt-0">
+                                <!--begin::Body-->
+                                <div class="card-body pt-0">
                                 @foreach($patient->userSessions as $userSession)
                                     <!--begin::Item-->
                                         <div class="mb-6">
@@ -300,14 +306,15 @@
                                             </div>
                                             <!--end::Content-->
                                         </div>
-                                    <!--end::Item-->
-                                @endforeach
+                                        <!--end::Item-->
+                                    @endforeach
+                                </div>
+                                <!--end: Card Body-->
                             </div>
-                            <!--end: Card Body-->
+                            <!--end: Card-->
+                            <!--end: لیست Widget 10-->
                         </div>
-                        <!--end: Card-->
-                        <!--end: لیست Widget 10-->
-                    </div>
+                    @endcan
                 </div>
                 <!--end::Row-->
 

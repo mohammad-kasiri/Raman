@@ -36,7 +36,7 @@
             data-menu-scroll="1" data-menu-dropdown-timeout="500">
             <!--begin::Menu Nav-->
             <ul class="menu-nav ">
-
+                @canany(['patients'])
                 <li class="menu-item  menu-item-submenu" aria-haspopup="true"  data-menu-toggle="hover">
                     <a  href="javascript:;" class="menu-link menu-toggle">
                         <i class="menu-icon flaticon2-group"></i>
@@ -46,12 +46,14 @@
                     <div class="menu-submenu ">
                         <i class="menu-arrow"></i>
                         <ul class="menu-subnav">
-                            <li class="menu-item  menu-item-submenu" aria-haspopup="true"  data-menu-toggle="hover">
-                                <a  href="{{route('admin.patients.index')}}" class="menu-link ">
-                                    <i class="menu-bullet menu-bullet-dot"><span></span></i>
-                                    <span class="menu-text">بیماران</span>
-                                </a>
-                            </li>
+                            @can('patients')
+                                <li class="menu-item  menu-item-submenu" aria-haspopup="true"  data-menu-toggle="hover">
+                                    <a  href="{{route('admin.patients.index')}}" class="menu-link ">
+                                        <i class="menu-bullet menu-bullet-dot"><span></span></i>
+                                        <span class="menu-text">بیماران</span>
+                                    </a>
+                                </li>
+                            @endcan
                             <li class="menu-item  menu-item-submenu" aria-haspopup="true"  data-menu-toggle="hover">
                                 <a  href="https://ahanamn.com/admin/user?level=admin" class="menu-link ">
                                     <i class="menu-bullet menu-bullet-dot"><span></span></i>
@@ -67,6 +69,7 @@
                         </ul>
                     </div>
                 </li>
+                @endcanany
 
             </ul>
         </div>
