@@ -19,18 +19,32 @@ class DatabaseSeeder extends Seeder
         $this->call(MartialStatusSeeder::class);
         $this->call(CareerSeeder::class);
         $this->call(PermissionSeeder::class);
-
         Role::factory()->fullAdmin()->create();
-        User::factory(1)->superAdmin()->hasUserSessions(10)->create();
+
+        User::factory()->superAdmin()->hasUserSessions(10)->create();
         User::factory()->count(20)->doctor()->hasUserSessions(10)->create();
-        User::factory(100)->hasUserSessions(10)->hasPatient(1)->create();
+        User::factory()->count(100)->hasUserSessions(10)->hasPatient(1)->create();
 
 
-        DB::table('role_user')->insert(['user_id' => 1 , 'role_id' => 1]);
+        $this->makeFullAccessAdmin(1);
+    }
+
+    public  function makeFullAccessAdmin(array|int $forUser = 1)
+    {
         $permissions = Permission::query()->select('id')->get()->pluck('id');
         foreach ($permissions as $permission) {
-            DB::table('permission_role')->insert(['role_id' => 1 , 'permission_id'=> $permission]);
+            DB::table('permission_role')->insert(['role_id' => 1, 'permission_id' => $permission]);
         }
 
+        if (is_int($forUser)) {
+            DB::table('role_user')->insert(['user_id' => $forUser, 'role_id' => 1]);
+        }
+
+        if (is_array($forUser)) {
+            foreach ($forUser as $user)
+            {
+                DB::table('role_user')->insert(['user_id' => $user, 'role_id' => 1]);
+            }
+        }
     }
 }
