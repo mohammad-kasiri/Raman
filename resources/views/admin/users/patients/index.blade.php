@@ -8,8 +8,9 @@
                 ['title' => 'افزودن بیمار جدید' , 'icon' => '<i class="fas fa-plus icon-nm"></i>' , 'route' => route('admin.patients.create') ],
             ];
         @endphp
-        <x-dashboard.subheader :links='$buttons' :title="'لیست بیماران'" />
     @endcan
+        <x-dashboard.subheader :links='$buttons ?? []' :title="'لیست بیماران'" />
+
 @endsection
 
 @section('content')
@@ -27,7 +28,7 @@
                         </button>
                     </div>
                 </div>
-        @endif
+            @endif
         <!--end::Notice-->
             <!--begin::Card-->
             <div class="card card-custom">
