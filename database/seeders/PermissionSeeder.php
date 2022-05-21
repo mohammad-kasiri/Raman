@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 class PermissionSeeder extends Seeder
@@ -15,8 +16,10 @@ class PermissionSeeder extends Seeder
 
     public function Permissions() : array
     {
-        return   $this->patientPermissions();
-
+        return   Arr::collapse([
+            $this->patientPermissions() ,
+            $this->doctorPermissions()
+        ]);
     }
 
     public function patientPermissions () : array
@@ -57,6 +60,48 @@ class PermissionSeeder extends Seeder
                 'parent'   => 4 ,    //patients.show
                 'name'     => 'patients.session.index' ,
                 'label'    => 'نمایش لیست نشست های بیمار'
+            ],
+
+        ];
+    }
+    public function doctorPermissions () : array
+    {
+        return [
+            [
+                'id'       => 7 ,
+                'parent'   => null ,  // -- without parent -- //
+                'name'     => 'doctors' ,
+                'label'    => 'پزشکان'
+            ],
+            [
+                'id'       => 8 ,
+                'parent'   => 7 ,   //doctors
+                'name'     => 'doctors.index' ,
+                'label'    => 'مشاهده لیست پزشکان'
+            ],
+            [
+                'id'       => 9 ,
+                'parent'   => 7 ,   //doctors
+                'name'     => 'doctors.create' ,
+                'label'    => 'افزودن پزشک جدید'
+            ],
+            [
+                'id'       => 10 ,
+                'parent'   => 7 ,   //doctors
+                'name'     => 'doctors.show' ,
+                'label'    => 'مشاهده ی اطلاعات پزشک'
+            ],
+            [
+                'id'       => 11 ,
+                'parent'   => 10 ,    //doctors.show
+                'name'     => 'doctors.edit' ,
+                'label'    => 'ویرایش اطلاعات پزشک'
+            ],
+            [
+                'id'       => 12 ,
+                'parent'   => 10 ,    //doctors.show
+                'name'     => 'doctors.session.index' ,
+                'label'    => 'نمایش لیست نشست های پزشک'
             ],
 
         ];

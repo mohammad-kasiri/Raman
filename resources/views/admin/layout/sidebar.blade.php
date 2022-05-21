@@ -46,7 +46,7 @@
                     <div class="menu-submenu ">
                         <i class="menu-arrow"></i>
                         <ul class="menu-subnav">
-                            @can('patients')
+                            @can( 'patients' )
                                 <li class="menu-item  menu-item-submenu" aria-haspopup="true"  data-menu-toggle="hover">
                                     <a  href="{{route('admin.patients.index')}}" class="menu-link ">
                                         <i class="menu-bullet menu-bullet-dot"><span></span></i>
@@ -54,12 +54,16 @@
                                     </a>
                                 </li>
                             @endcan
+
+                            @can( 'doctors' )
                             <li class="menu-item  menu-item-submenu" aria-haspopup="true"  data-menu-toggle="hover">
-                                <a  href="https://ahanamn.com/admin/user?level=admin" class="menu-link ">
+                                <a  href="{{route('admin.doctors.index')}}" class="menu-link ">
                                     <i class="menu-bullet menu-bullet-dot"><span></span></i>
                                     <span class="menu-text">پزشکان</span>
                                 </a>
                             </li>
+                            @endcan
+
                             <li class="menu-item  menu-item-submenu" aria-haspopup="true"  data-menu-toggle="hover">
                                 <a  href="https://ahanamn.com/admin/user?level=admin" class="menu-link ">
                                     <i class="menu-bullet menu-bullet-dot"><span></span></i>
