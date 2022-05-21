@@ -81,6 +81,11 @@ class User extends Authenticatable
         return $query->where('level', '=', 'patient');
     }
 
+    public function scopeDoctors($query)
+    {
+        return $query->where('level', '=', 'doctor');
+    }
+
     public function scopePatientsWithDetail($query)
     {
         return $query->where('level', '=', 'patient')->with('patient');
