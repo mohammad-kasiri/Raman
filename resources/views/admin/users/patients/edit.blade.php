@@ -106,7 +106,7 @@
                                         </div>
                                     </div>
                                     <!--end::Form ویزارد گام 1-->
-                                    
+
                                     <!--begin::Form ویزارد گام 2-->
                                     <div class="pb-5" data-wizard-type="step-content">
                                         <div class="row">
@@ -144,7 +144,8 @@
                                     <div class="pb-5" data-wizard-type="step-content">
                                         <h3 class="mb-10 font-weight-bold">جزئیات اطلاعات بیمار</h3>
                                         <x-dashboard.form.row-input label="شغل"  name="career" autosearch="{{route('admin.career.api')}}" value="{{$patient->patient->career}}"/>
-
+                                        <x-dashboard.form.row-input label="آخرین مدرک تحصیلی"  name="degree" autosearch="{{route('admin.degree.api')}}" value="{{$patient->patient->degree}}"/>
+                                        <x-dashboard.form.row-input label="رشته تحصیلی"  name="study_field" autosearch="{{route('admin.study-field.api')}}" value="{{$patient->patient->study_field}}"/>
                                         <x-dashboard.form.row-input label="تاریخ تولد"  name="birthdate" datepicker="true" value="{{$patient->patient->birthdateDateTime()}}"/>
                                         <x-dashboard.form.row-input label="وضعیت تاهل"  name="marital_status" autosearch="{{route('admin.marital.api')}}" value="{{$patient->patient->marital_status}}"/>
                                     </div>

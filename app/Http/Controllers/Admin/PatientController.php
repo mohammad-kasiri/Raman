@@ -93,6 +93,8 @@ class PatientController extends Controller
             'address'        => $request->validated('address'),
             'birthdate'      => Date::format($request->validated('birthdate')),
             'marital_status' => $request->validated('marital_status'),
+            'degree'         => $request->validated('degree'),
+            'study_field'    => $request->validated('study_field'),
         ];
     }
 }

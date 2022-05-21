@@ -34,8 +34,10 @@ class UpdateRequest extends FormRequest
             'city_id'         => ['nullable' , 'numeric'  , 'min:32' , 'max:458'],
             'address'         => ['nullable' , 'max:180'],
             'career'          => ['nullable' , 'max:30'],
-            'birthdate'       => ['nullable' , 'min:10' , 'max:10'],
             'marital_status'  => ['nullable' , 'max:30'],
+            'degree'          => ['nullable' , 'max:30'],
+            'study_field'     => ['nullable' , 'max:30'],
+            'birthdate'       => ['nullable' , 'min:10' , 'max:10'],
         ];
     }
 }

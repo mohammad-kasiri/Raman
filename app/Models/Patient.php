@@ -14,7 +14,7 @@ use Morilog\Jalali\Jalalian;
 class Patient extends Model
 {
     use HasFactory;
-    protected $fillable = ['career', 'city_id', 'address' , 'birthdate' , 'marital_status'];
+    protected $fillable = ['career', 'city_id', 'address' , 'birthdate' ,'degree' , 'study_field', 'marital_status'];
 
     public function user()
     {

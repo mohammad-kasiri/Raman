@@ -35,8 +35,10 @@ class StoreRequest extends FormRequest
             'address'         => ['nullable' , 'max:180'],
             'password'        => ['nullable' , 'min:4' , 'max:20' , 'confirmed'],
             'career'          => ['nullable' , 'max:30'],
-            'birthdate'       => ['nullable' , 'min:10' , 'max:10'],
+            'degree'          => ['nullable' , 'max:30'],
+            'study_field'     => ['nullable' , 'max:30'],
             'marital_status'  => ['nullable' , 'max:30'],
+            'birthdate'       => ['nullable' , 'min:10' , 'max:10'],
         ];
     }
 }

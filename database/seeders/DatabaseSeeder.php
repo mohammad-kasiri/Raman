@@ -18,11 +18,13 @@ class DatabaseSeeder extends Seeder
         $this->call(ProvinceSeeder::class);
         $this->call(MartialStatusSeeder::class);
         $this->call(CareerSeeder::class);
+        $this->call(DegreeSeeder::class);
+        $this->call(StudyFieldSeeder::class);
         $this->call(PermissionSeeder::class);
         Role::factory()->fullAdmin()->create();
 
         User::factory()->superAdmin()->hasUserSessions(10)->create();
-        User::factory()->count(20)->doctor()->hasUserSessions(10)->create();
+        User::factory()->count(5)->doctor()->hasUserSessions(10)->create();
         User::factory()->count(100)->hasUserSessions(10)->hasPatient(1)->create();
 
 

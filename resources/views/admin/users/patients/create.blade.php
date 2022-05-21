@@ -150,6 +150,8 @@
                                 <div class="pb-5" data-wizard-type="step-content">
                                     <h3 class="mb-10 font-weight-bold">جزئیات اطلاعات بیمار</h3>
                                     <x-dashboard.form.row-input label="شغل"  name="career" autosearch="{{route('admin.career.api')}}"/>
+                                    <x-dashboard.form.row-input label="آخرین مدرک تحصیلی"  name="degree" autosearch="{{route('admin.degree.api')}}"/>
+                                    <x-dashboard.form.row-input label="رشته تحصیلی"  name="study_field" autosearch="{{route('admin.study-field.api')}}"/>
                                     <x-dashboard.form.row-input label="تاریخ تولد"  name="birthdate" datepicker="true" />
                                     <x-dashboard.form.row-input label="وضعیت تاهل"  name="marital_status" autosearch="{{route('admin.marital.api')}}" />
                                 </div>

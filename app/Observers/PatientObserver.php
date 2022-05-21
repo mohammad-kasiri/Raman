@@ -3,20 +3,27 @@
 namespace App\Observers;
 
 use App\Models\Career;
+use App\Models\Degree;
 use App\Models\MaritalStatus;
 use App\Models\Patient;
+use App\Models\StudyField;
+use App\Models\User;
 
 class PatientObserver
 {
-    public function created(Patient $patient)
+    public function creating(User $user)
     {
-        !is_null($patient->marital_status) &&  MaritalStatus::UpdateAutoComplete($patient->marital_status);
-        !is_null($patient->career)         &&  Career::UpdateAutoComplete($patient->career);
+        isset($user->patient->marital_status) &&  MaritalStatus::UpdateAutoComplete($user->marital_status);
+        isset($user->patient->career)         &&  Career::UpdateAutoComplete($user->career);
+        isset($user->patient->degree)         &&  Degree::UpdateAutoComplete($user->degree);
+        isset($user->patient->study_field)    &&  StudyField::UpdateAutoComplete($user->study_field);
     }
 
-    public function updated(Patient $patient)
+    public function updating(User $user)
     {
-        !is_null($patient->marital_status) &&  MaritalStatus::UpdateAutoComplete($patient->marital_status);
-        !is_null($patient->career)         &&  Career::UpdateAutoComplete($patient->career);
+        isset($user->patient->marital_status) &&  MaritalStatus::UpdateAutoComplete($user->marital_status);
+        isset($user->patient->career)         &&  Career::UpdateAutoComplete($user->career);
+        isset($user->patient->degree)         &&  Degree::UpdateAutoComplete($user->degree);
+        isset($user->patient->study_field)    &&  StudyField::UpdateAutoComplete($user->study_field);
     }
 }

@@ -16,11 +16,13 @@ return new class extends Migration
         Schema::create('patients', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('career' , 30)->nullable();
             $table->unsignedBigInteger('city_id')->nullable();
             $table->string('address' , 180)->nullable();
+            $table->string('career' , 30)->nullable();
+            $table->string('marital_status' , 40)->nullable();
+            $table->string('degree' , 40)->nullable();
+            $table->string('study_field' , 40)->nullable();
             $table->timestamp('birthdate')->nullable();
-            $table->string('marital_status')->nullable();
             $table->timestamps();
         });
     }
