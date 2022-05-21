@@ -6,7 +6,9 @@ use App\Events\NewUserRegisteredEvent;
 use App\Listeners\GetUserSessionAfterLoginListener;
 use App\Listeners\Notification\SendNotificationToAdminOnRegistrationListener;
 use App\Listeners\UpdateUserLastLoginAfterUserLogedinListener;
+use App\Models\User;
 use App\Models\Verification;
+use App\Observers\PatientObserver;
 use App\Observers\VerificationObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -30,6 +32,7 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         Verification::observe(VerificationObserver::class);
+        User::observe(PatientObserver::class);
     }
 
 
