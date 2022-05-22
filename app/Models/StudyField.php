@@ -10,7 +10,6 @@ class StudyField extends Model
 
     public static function UpdateAutoComplete($study_field)
     {
-        dd(10);
         static::query()->firstOrCreate(['title' => $study_field]);
     }
 }
