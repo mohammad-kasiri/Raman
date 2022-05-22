@@ -9,6 +9,7 @@ use Morilog\Jalali\Jalalian;
 class UserSession extends Model
 {
     use HasFactory;
+    const PAGINATION_LIMIT = 20;
 
     protected $fillable = ['device' , 'browser' , 'platform' , 'language' , 'ip_address' , 'city' , 'country' , 'isp' , 'timezone'];
 
