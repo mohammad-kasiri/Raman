@@ -11,19 +11,19 @@ use App\Models\User;
 
 class PatientObserver
 {
-    public function creating(User $user)
+    public function created(Patient $patient)
     {
-        isset($user->patient->marital_status) &&  MaritalStatus::UpdateAutoComplete($user->marital_status);
-        isset($user->patient->career)         &&  Career::UpdateAutoComplete($user->career);
-        isset($user->patient->degree)         &&  Degree::UpdateAutoComplete($user->degree);
-        isset($user->patient->study_field)    &&  StudyField::UpdateAutoComplete($user->study_field);
+        isset($patient->marital_status) &&  MaritalStatus::UpdateAutoComplete($patient->marital_status);
+        isset($patient->career)         &&  Career::UpdateAutoComplete($patient->career);
+        isset($patient->degree)         &&  Degree::UpdateAutoComplete($patient->degree);
+        isset($patient->study_field)    &&  StudyField::UpdateAutoComplete($patient->study_field);
     }
 
-    public function updating(User $user)
+    public function updated(Patient $patient)
     {
-        isset($user->patient->marital_status) &&  MaritalStatus::UpdateAutoComplete($user->marital_status);
-        isset($user->patient->career)         &&  Career::UpdateAutoComplete($user->career);
-        isset($user->patient->degree)         &&  Degree::UpdateAutoComplete($user->degree);
-        isset($user->patient->study_field)    &&  StudyField::UpdateAutoComplete($user->study_field);
+        isset($patient->marital_status) &&  MaritalStatus::UpdateAutoComplete($patient->marital_status);
+        isset($patient->career)         &&  Career::UpdateAutoComplete($patient->career);
+        isset($patient->degree)         &&  Degree::UpdateAutoComplete($patient->degree);
+        isset($patient->study_field)    &&  StudyField::UpdateAutoComplete($patient->study_field);
     }
 }

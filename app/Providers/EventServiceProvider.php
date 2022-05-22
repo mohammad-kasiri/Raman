@@ -6,6 +6,7 @@ use App\Events\NewUserRegisteredEvent;
 use App\Listeners\GetUserSessionAfterLoginListener;
 use App\Listeners\Notification\SendNotificationToAdminOnRegistrationListener;
 use App\Listeners\UpdateUserLastLoginAfterUserLogedinListener;
+use App\Models\Patient;
 use App\Models\User;
 use App\Models\Verification;
 use App\Observers\PatientObserver;
@@ -32,7 +33,7 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         Verification::observe(VerificationObserver::class);
-        User::observe(PatientObserver::class);
+        Patient::observe(PatientObserver::class);
     }
 
 
