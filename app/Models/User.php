@@ -16,7 +16,7 @@ class User extends Authenticatable
 
     const AVATAR_PATH = "/images/avatar/";
     const PAGINATION_LIMIT = 20;
-    const PROFILE_SESSION_LIMIT = 4;
+    const PROFILE_SESSION_LIMIT = 6;
 
     /**
      * The attributes that are mass assignable.
