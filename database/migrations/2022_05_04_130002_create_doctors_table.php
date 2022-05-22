@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('doctors', function (Blueprint $table) {
             $table->id();
+            $table->boolean('is_visible');
+            $table->timestamp('first_day_of_work');
             $table->timestamps();
         });
     }

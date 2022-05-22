@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('social_media', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->string('font_awesome');
+            $table->string('bootstrap_icon');
+            $table->text('svg_icon');
             $table->timestamps();
         });
     }
