@@ -108,7 +108,7 @@
                             @endcan
                             @can('patients.session.index')
                             <div class="navi-item mb-2">
-                                <a href="custom/apps/profile/profile-1/account-information.html" class="navi-link py-4 ">
+                                <a href="{{route('admin.patients.session.index' , $patient->id)}}" class="navi-link py-4 ">
                                     <span class="navi-icon mr-2">
                                         <span class="svg-icon">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/کد/Compiling.svg-->
@@ -173,6 +173,30 @@
                                                 <td class="text-right">
                                                     <span class="text-muted font-weight-bold">
                                                         {{$patient?->patient->career ?? 'وارد نشده'}}
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="pl-0">
+                                                    <p  class="text-dark font-weight-bolder text-hover-primary mb-1 font-size-lg">
+                                                        آخرین مدرک تحصیلی
+                                                    </p>
+                                                </td>
+                                                <td class="text-right">
+                                                    <span class="text-muted font-weight-bold">
+                                                        {{$patient?->patient->degree ?? 'وارد نشده'}}
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="pl-0">
+                                                    <p  class="text-dark font-weight-bolder text-hover-primary mb-1 font-size-lg">
+                                                        رشته تحصیلی
+                                                    </p>
+                                                </td>
+                                                <td class="text-right">
+                                                    <span class="text-muted font-weight-bold">
+                                                        {{$patient?->patient->study_field ?? 'وارد نشده'}}
                                                     </span>
                                                 </td>
                                             </tr>
