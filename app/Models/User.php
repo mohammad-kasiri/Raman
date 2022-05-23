@@ -61,6 +61,16 @@ class User extends Authenticatable
                                     'role_id');
     }
 
+    public function socialMedias()
+    {
+        return $this->belongsToMany(SocialMedia::class,
+                                    'social_media_user',
+                                    'user_id',
+                                    'social_media_id')
+                    ->withPivot(['link' , 'is_active'])
+                    ->as('socialMedia');
+    }
+
     public function userSessions()
     {
         return $this->hasMany(UserSession::class);
