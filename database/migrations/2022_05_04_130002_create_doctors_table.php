@@ -15,8 +15,11 @@ return new class extends Migration
     {
         Schema::create('doctors', function (Blueprint $table) {
             $table->id();
-            $table->boolean('is_visible');
-            $table->timestamp('first_day_of_work');
+            $table->text('educational_background')  ->nullable();
+            $table->text('bio')                     ->nullable();
+            $table->string('mobile' , 13)    ->nullable();
+            $table->boolean('is_visible')           ->default(true);
+            $table->timestamp('first_day_of_work')  ->nullable();
             $table->timestamps();
         });
     }
