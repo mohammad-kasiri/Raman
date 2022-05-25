@@ -16,7 +16,9 @@ return new class extends Migration
     {
         Schema::create('doctors', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->text('educational_background')  ->nullable();
+            $table->text('working_background')         ->nullable();
             $table->text('bio')                     ->nullable();
             $table->integer('price_per_minute')     ->default(Doctor::MIN_PRICE_PER_MINUTE);
             $table->boolean('is_visible')           ->default(true);
