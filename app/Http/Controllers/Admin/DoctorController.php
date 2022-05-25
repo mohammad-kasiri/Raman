@@ -19,7 +19,7 @@ class DoctorController extends Controller
 
     public function create()
     {
-        return view('');
+        return view('admin.users.doctors.create');
     }
 
     public function store(StoreRequest $request)

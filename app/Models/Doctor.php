@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Doctor extends Model
 {
     use HasFactory;
+    const MIN_PRICE_PER_MINUTE = 2500;
+
+    protected $fillable=['educational_background' , 'bio' , 'price_per_minute' ,'is_visible' , 'first_day_of_work'];
+
     public function user()
     {
         return $this->belongsTo(User::class);

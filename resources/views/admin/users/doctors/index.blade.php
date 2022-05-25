@@ -5,7 +5,7 @@
     @can('doctors.create')
         @php
             $buttons = [
-                ['title' => 'افزودن پزشک جدید' , 'icon' => '<i class="fas fa-plus icon-nm"></i>' , 'route' => route('admin.doctors.index') ],
+                ['title' => 'افزودن پزشک جدید' , 'icon' => '<i class="fas fa-plus icon-nm"></i>' , 'route' => route('admin.doctors.create') ],
             ];
         @endphp
     @endcan
