@@ -22,10 +22,11 @@ class DatabaseSeeder extends Seeder
         $this->call(StudyFieldSeeder::class);
         $this->call(PermissionSeeder::class);
         $this->call(StudyFieldSeeder::class);
+        $this->call(SubjectSeeder::class);
         Role::factory()->fullAdmin()->create();
 
         User::factory()->superAdmin()->hasUserSessions(10)->create();
-        User::factory()->count(5)->doctor()->hasUserSessions(10)->create();
+        User::factory()->count(5)->doctor()->hasUserSessions(10)->hasDoctor(1)->create();
         User::factory()->count(100)->hasUserSessions(10)->hasPatient(1)->create();
 
 

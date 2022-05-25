@@ -8,9 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Doctor extends Model
 {
     use HasFactory;
+
     const MIN_PRICE_PER_MINUTE = 2500;
 
-    protected $fillable=['educational_background' , 'bio' , 'price_per_minute' ,'is_visible' , 'first_day_of_work'];
+    protected $fillable = ['educational_background', 'working_background', 'bio', 'price_per_minute', 'is_visible', 'first_day_of_work'];
 
     public function user()
     {
@@ -19,6 +20,6 @@ class Doctor extends Model
 
     public function subjects()
     {
-        return $this->belongsToMany(Subject::class,'doctor_Subject','doctor_id','subject_id');
+        return $this->belongsToMany(Subject::class, 'doctor_Subject', 'doctor_id', 'subject_id');
     }
 }

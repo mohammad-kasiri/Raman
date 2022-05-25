@@ -113,13 +113,10 @@
                                             <div class="col-xl-12">
                                                 <div class="form-group row">
                                                     <div class="col-lg-9 col-xl-6">
-                                                        <h3 class="mb-10 font-weight-bold text-dark">محل زندگی</h3>
+                                                        <h3 class="mb-10 font-weight-bold text-dark">توضیحات بایوگرافی</h3>
                                                     </div>
                                                 </div>
-                                                <x-dashboard.form.select.row label="شهر محل زندگی" name="city_id" searchable="true">
-                                                    <option value="">انتخاب شهر</option>
-                                                </x-dashboard.form.select.row>
-                                                <x-dashboard.form.row-input label="جزئیات آدرس" name="address"/>
+                                              <x-dashboard.form.text.textarea name="bio" label="توضیحات"/>
                                             </div>
                                         </div>
                                     </div>
@@ -127,9 +124,14 @@
 
                                     <!--begin::Form ویزارد گام 3-->
                                     <div class="pb-5" data-wizard-type="step-content">
-                                        <h3 class="mb-10 font-weight-bold text-dark">تنظیم کلمه ی عبور</h3>
-                                        <x-dashboard.form.row-input label="کلمه ی عبور"  name="password" type="password"/>
-                                        <x-dashboard.form.row-input label="تکرار کلمه ی عبور" name="password_confirmation" type="password"/>
+                                        <h3 class="mb-10 font-weight-bold text-dark">تخصص ها و خدمات پزشک</h3>
+                                        <div class="row">
+                                            @foreach($subjects as $subject)
+                                                <div class="col-md-4">
+                                                    <x-auth.form.checkbox/>
+                                                </div>
+                                            @endforeach()
+                                        </div>
                                     </div>
                                     <!--end::Form ویزارد گام 3-->
 
