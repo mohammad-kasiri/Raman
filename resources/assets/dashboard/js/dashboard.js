@@ -7,5 +7,7 @@ require('./scripts/auth.otp');
 require('./scripts/auth.timezone');
 
 require('./scripts/user.patient.add');
+require('./scripts/user.doctor.editor');
+
 
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Doctor\StoreRequest;
 use App\Http\Requests\Doctor\UpdateRequest;
 use App\Models\Province;
+use App\Models\SocialMedia;
 use App\Models\Subject;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -20,8 +21,11 @@ class DoctorController extends Controller
 
     public function create()
     {
-        $subjects = Subject::query()->orderBy('title' , 'DESC')->get();
-        return view('admin.users.doctors.create')->with(['subjects' => $subjects]);
+        $subjects     = Subject::query()->orderBy('title' , 'ASC')->get();
+        $socialMedias = SocialMedia::query()->get();
+        return view('admin.users.doctors.create')
+            ->with(['socialMedias' => $socialMedias])
+            ->with(['subjects'     => $subjects]);
     }
 
     public function store(StoreRequest $request)

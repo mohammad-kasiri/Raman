@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PermissionSeeder::class);
         $this->call(StudyFieldSeeder::class);
         $this->call(SubjectSeeder::class);
+        $this->call(SocialMediaSeeder::class);
         Role::factory()->fullAdmin()->create();
 
         User::factory()->superAdmin()->hasUserSessions(10)->create();

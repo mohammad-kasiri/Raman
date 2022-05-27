@@ -20,7 +20,7 @@
             <div class="card-body p-0">
 
                 <!--begin::ویزارد-->
-                <div class="wizard wizard-1" id="patient_add" data-wizard-state="step-first" data-wizard-clickable="true">
+                <div class="wizard wizard-1" id="doctor_add" data-wizard-state="step-first" data-wizard-clickable="true">
                     <div class="kt-grid__item">
                         <!--begin::ویزارد Nav-->
                         <div class="wizard-nav border-bottom">
@@ -41,7 +41,7 @@
                                 <div class="wizard-step" data-wizard-type="step">
                                     <div class="wizard-label">
 								        <span class="svg-icon svg-icon-4x wizard-icon">
-                                            <x-dashboard.icons.svg.globe/>
+                                            <x-dashboard.icons.svg.write/>
                                         </span>
                                         <h3 class="wizard-title">2.توضیحات</h3>
                                     </div>
@@ -53,9 +53,9 @@
                                 <div class="wizard-step" data-wizard-type="step">
                                     <div class="wizard-label">
 								        <span class="svg-icon svg-icon-4x wizard-icon">
-                                            <x-dashboard.icons.svg.lock/>
+                                            <x-dashboard.icons.svg.sketch/>
                                         </span>
-                                        <h3 class="wizard-title">3.تخصص ها</h3>
+                                        <h3 class="wizard-title">3.تخصص</h3>
                                     </div>
                                     <span class="svg-icon svg-icon-xl wizard-arrow">
                                         <x-dashboard.icons.svg.arrow-left/>
@@ -74,10 +74,18 @@
                                 </div>
                                 <div class="wizard-step" data-wizard-type="step">
                                     <div class="wizard-label">
-								    <span class="svg-icon svg-icon-4x wizard-icon">
-                                        <x-dashboard.icons.svg.compiled-file/>
-                                   </span>
+								        <span class="svg-icon svg-icon-4x wizard-icon">
+                                            <x-dashboard.icons.svg.chat4/>
+                                        </span>
                                         <h3 class="wizard-title">5.شبکه های اجتماعی</h3>
+                                    </div>
+                                </div>
+                                <div class="wizard-step" data-wizard-type="step">
+                                    <div class="wizard-label">
+								        <span class="svg-icon svg-icon-4x wizard-icon">
+                                            <x-dashboard.icons.svg.star/>
+                                        </span>
+                                        <h3 class="wizard-title">6.جزئیات اطلاعات پزشک</h3>
                                     </div>
                                 </div>
                             </div>
@@ -87,7 +95,7 @@
                         <div class="row justify-content-center my-10 px-8 my-lg-15 px-lg-10">
                             <div class="col-xl-12 col-xxl-7">
                                 <!--begin::Form ویزارد Form-->
-                                <form class="form" action="{{route('admin.patients.store')}}" method="post">
+                                <form class="form" action="{{route('admin.doctors.store')}}" method="post">
                                     @csrf
                                     <!--begin::Form ویزارد گام 1-->
                                     <div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
@@ -102,6 +110,12 @@
                                                     <x-dashboard.form.radio.button label="آقا" name="gender" value="male" color="danger"/>
                                                     <x-dashboard.form.radio.button label="خانم" name="gender" value="female" color="success"/>
                                                 </x-dashboard.form.radio.row>
+                                                <x-dashboard.form.file.image
+                                                    name="avatar"
+                                                    label="تصویر پروفایل"
+                                                    id="doctor_avatar"
+                                                    default_image="{{asset('images/static/avatars/male/1.png')}}"
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -116,7 +130,7 @@
                                                         <h3 class="mb-10 font-weight-bold text-dark">توضیحات بایوگرافی</h3>
                                                     </div>
                                                 </div>
-                                              <x-dashboard.form.text.textarea name="bio" label="توضیحات"/>
+                                              <x-dashboard.form.text.Quill name="bio"/>
                                             </div>
                                         </div>
                                     </div>
@@ -126,9 +140,15 @@
                                     <div class="pb-5" data-wizard-type="step-content">
                                         <h3 class="mb-10 font-weight-bold text-dark">تخصص ها و خدمات پزشک</h3>
                                         <div class="row">
+
                                             @foreach($subjects as $subject)
-                                                <div class="col-md-4">
-                                                    <x-auth.form.checkbox/>
+                                                <div class="col-md-4 my-5">
+                                                   <x-dashboard.form.checkbox
+                                                       name="subjects[]"
+                                                       value="{{ $subject->id }}"
+                                                   >
+                                                       {{ $subject->title }}
+                                                   </x-dashboard.form.checkbox>
                                                 </div>
                                             @endforeach()
                                         </div>
@@ -137,14 +157,35 @@
 
                                     <!--begin::Form ویزارد گام 4-->
                                     <div class="pb-5" data-wizard-type="step-content">
-                                        <h3 class="mb-10 font-weight-bold">جزئیات اطلاعات بیمار</h3>
-                                        <x-dashboard.form.row-input label="شغل"  name="career" autosearch="{{route('admin.career.api')}}"/>
-                                        <x-dashboard.form.row-input label="آخرین مدرک تحصیلی"  name="degree" autosearch="{{route('admin.degree.api')}}"/>
-                                        <x-dashboard.form.row-input label="رشته تحصیلی"  name="study_field" autosearch="{{route('admin.study-field.api')}}"/>
-                                        <x-dashboard.form.row-input label="تاریخ تولد"  name="birthdate" datepicker="true" />
-                                        <x-dashboard.form.row-input label="وضعیت تاهل"  name="marital_status" autosearch="{{route('admin.marital.api')}}" />
+                                        <h3 class="mb-10 font-weight-bold text-dark">ایجاد کلمه ی عبور</h3>
+                                        <x-dashboard.form.row-input label="کلمه ی عبور"  name="password" type="password"/>
+                                        <x-dashboard.form.row-input label="تکرار کلمه ی عبور" name="password_confirmation" type="password"/>
                                     </div>
                                     <!--end::Form ویزارد گام 4-->
+
+                                    <!--begin::Form ویزارد گام 5-->
+                                    <div class="pb-5" data-wizard-type="step-content">
+                                        @foreach($socialMedias as $socialMedia)
+                                            <x-dashboard.form.row-input
+                                                label=' آدرس {{$socialMedia->fa_title}}'
+                                                name="socialMedia[{{$socialMedia->id}}]"
+                                            />
+                                        @endforeach
+                                    </div>
+                                    <!--end::Form ویزارد گام 5-->
+
+                                    <!--begin::Form ویزارد گام 6-->
+                                    <div class="pb-5" data-wizard-type="step-content">
+                                       <x-dashboard.form.select.row label="قابلیت نمایش" name="is_visible">
+                                           <option value="1"  {{old('is_visible') == '1' ? 'selected' : ''}}>نمایش بر روی سایت</option>
+                                           <option value="0"  {{old('is_visible') == '0' ? 'selected' : ''}}>عدم نمایش بر روی سایت</option>
+                                       </x-dashboard.form.select.row>
+                                        <x-dashboard.form.row-input type="number" label='هزینه هر دقیقه (تومان)' name="price_per_minute"/>
+                                        <x-dashboard.form.text.textarea label="سوابق تحصیلی" name="educational_background"/>
+                                        <x-dashboard.form.text.textarea label="سوابق کاری" name="	working_background"/>
+                                        <x-dashboard.form.row-input label="تاریخ شروع کار"  name="first_day_of_work" datepicker="true" />
+                                    </div>
+                                    <!--end::Form ویزارد گام 6-->
 
                                     <!--begin::ویزارد اقدامات-->
                                     <div class="d-flex justify-content-between border-top pt-10">
