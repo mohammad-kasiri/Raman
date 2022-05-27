@@ -2,6 +2,7 @@
     'label' ,
     'name'  ,
     'value' => '',
+    'rows'   => 4 ,
     'autocomplete' => 'off',
     'datepicker'   => false,
     'autosearch'   => false,
@@ -15,6 +16,7 @@
                name="{{$name}}"
                placeholder="{{$label . ' را وارد کنید. '}}"
                autocomplete="{{$autocomplete}}"
+               rows="{{$rows}}"
                @if($autosearch)  auto-search="{{$autosearch}}" @endif
                @if($disabled)  disabled @endif
         >{{old($name , $value)}}</textarea>
