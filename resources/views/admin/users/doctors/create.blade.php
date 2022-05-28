@@ -12,6 +12,7 @@
 @endsection
 @section('content')
     <!--begin::Entry-->
+
     <!--begin::Container-->
     <div class=" container ">
         <!--begin::Card-->
@@ -95,11 +96,11 @@
                         <div class="row justify-content-center my-10 px-8 my-lg-15 px-lg-10">
                             <div class="col-xl-12 col-xxl-7">
                                 <!--begin::Form ویزارد Form-->
-                                <form class="form" action="{{route('admin.doctors.store')}}" method="post">
+                                <form class="form" action="{{route('admin.doctors.store')}}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <!--begin::Form ویزارد گام 1-->
                                     <div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
-                                        <h3 class="mb-10 font-weight-bold text-dark">اطلاعات اصلی بیمار:</h3>
+                                        <h3 class="mb-10 font-weight-bold text-dark">اطلاعات اصلی پزشک:</h3>
                                         <div class="row">
                                             <div class="col-xl-12">
                                                 <x-dashboard.form.row-input label="نام" name="first_name"/>
@@ -130,7 +131,7 @@
                                                         <h3 class="mb-10 font-weight-bold text-dark">توضیحات بایوگرافی</h3>
                                                     </div>
                                                 </div>
-                                              <x-dashboard.form.text.Quill name="bio"/>
+                                              <x-dashboard.form.text.textarea name="bio" label="توضیحات" rows="6"/>
                                             </div>
                                         </div>
                                     </div>
@@ -140,17 +141,17 @@
                                     <div class="pb-5" data-wizard-type="step-content">
                                         <h3 class="mb-10 font-weight-bold text-dark">تخصص ها و خدمات پزشک</h3>
                                         <div class="row">
-
                                             @foreach($subjects as $subject)
                                                 <div class="col-md-4 my-5">
                                                    <x-dashboard.form.checkbox
-                                                       name="subjects[]"
+                                                       name="subjects[{{$subject->id}}]"
                                                        value="{{ $subject->id }}"
+                                                       checked="{{old('subjects.'.$subject->id) ? '1' : 0}}"
                                                    >
                                                        {{ $subject->title }}
                                                    </x-dashboard.form.checkbox>
                                                 </div>
-                                            @endforeach()
+                                            @endforeach
                                         </div>
                                     </div>
                                     <!--end::Form ویزارد گام 3-->
@@ -169,6 +170,7 @@
                                             <x-dashboard.form.row-input
                                                 label=' آدرس {{$socialMedia->fa_title}}'
                                                 name="socialMedia[{{$socialMedia->id}}]"
+                                                value="{{old('socialMedia.'.$socialMedia->id)}}"
                                             />
                                         @endforeach
                                     </div>
@@ -181,8 +183,8 @@
                                            <option value="0"  {{old('is_visible') == '0' ? 'selected' : ''}}>عدم نمایش بر روی سایت</option>
                                        </x-dashboard.form.select.row>
                                         <x-dashboard.form.row-input type="number" label='هزینه هر دقیقه (تومان)' name="price_per_minute"/>
-                                        <x-dashboard.form.text.textarea label="سوابق تحصیلی" name="educational_background"/>
-                                        <x-dashboard.form.text.textarea label="سوابق کاری" name="	working_background"/>
+                                        <x-dashboard.form.text.textarea label="سوابق تحصیلی" name="educational_background" />
+                                        <x-dashboard.form.text.textarea label="سوابق کاری" name="working_background" />
                                         <x-dashboard.form.row-input label="تاریخ شروع کار"  name="first_day_of_work" datepicker="true" />
                                     </div>
                                     <!--end::Form ویزارد گام 6-->
