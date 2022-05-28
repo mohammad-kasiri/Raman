@@ -1,7 +1,8 @@
 @props([
-    'name'  ,
-    'value' => '',
-    'disabled'     => false,
+    'name',
+    'value'    => '',
+    'disabled' => false,
+    'checked',
 ])
 @php
     $id = \Illuminate\Support\Str::random(10);
@@ -12,12 +13,7 @@
                name="{{ $name }}"
                value="{{ $value }}"
                id="{{$id}}"
-
-               @if(old($name))
-                   @foreach(old($name) as $item)
-                       {{$$item == $name->id ? "checked" : ""}}
-                   @endforeach
-               @endif
+               {{$checked == '1' ? 'checked' : ''}}
         />
         <span></span>
         {{$slot}}
