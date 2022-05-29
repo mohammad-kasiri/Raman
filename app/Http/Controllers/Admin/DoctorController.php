@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Functions\Date;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Doctor\StoreRequest;
 use App\Http\Requests\Doctor\UpdateRequest;
@@ -10,6 +11,8 @@ use App\Models\SocialMedia;
 use App\Models\Subject;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class DoctorController extends Controller
 {
@@ -30,8 +33,33 @@ class DoctorController extends Controller
 
     public function store(StoreRequest $request)
     {
-        User::query()->create();
-        return redirect()->route('');
+        $user = User::query()->create(
+            array_merge($this->userInputs($request),
+                [
+                    'mobile'   => $request->validated('mobile'),
+                    'password' => Hash::make($request->validated('password')),
+                ]
+            )
+        );
+
+        if(isset($request->socialMedia) && count($request->socialMedia) > 0)
+        {
+            foreach ($request->socialMedia as $social)
+            {
+                $user->socialMedias()->attach($request->socialMedia , ['link' => $request->socialMedia[$social] ]);
+            }
+        }
+
+        $user->doctor()->create($this->doctorInputs($request));
+
+        if(isset($request->subjects) && is_array($request->subjects) && count($request->subjects) > 0)
+        {
+            $user->doctor->subjects()->attach($request->subjects);
+        }
+
+        Session::flash('message', 'بیمار جدید با موفقیت اضافه شد.');
+        return redirect()->route('admin.patients.index');
+
     }
 
     public function edit($doctor)
@@ -48,5 +76,28 @@ class DoctorController extends Controller
     {
         $doctor->update();
         return redirect()->route('admin.doctor.show', $doctor->id);
+    }
+
+
+    private function userInputs($request)
+    {
+        return [
+            'first_name' => $request->validated('first_name'),
+            'last_name'  => $request->validated('last_name'),
+            'gender'     => $request->validated('gender'),
+            'email'      => $request->validated('email'),
+        ];
+    }
+
+    private function doctorInputs($request)
+    {
+        return [
+            'educational_background'    => $request->validated('educational_background'),
+            'working_background'        => $request->validated('working_background'),
+            'bio'                       => $request->validated('bio'),
+            'price_per_minute'          => $request->validated('price_per_minute'),
+            'is_visible'                => $request->validated('is_visible'),
+            'first_day_of_work'         => Date::format($request->validated('first_day_of_work')),
+        ];
     }
 }
