@@ -44,9 +44,9 @@ class DoctorController extends Controller
 
         if(isset($request->socialMedia) && count($request->socialMedia) > 0)
         {
-            foreach ($request->socialMedia as $social)
+            foreach (array_filter($request->socialMedia) as $key => $social)
             {
-                $user->socialMedias()->attach($request->socialMedia , ['link' => $request->socialMedia[$social] ]);
+                $user->socialMedias()->attach($key ,  ['link' => $social]);
             }
         }
 
@@ -57,8 +57,8 @@ class DoctorController extends Controller
             $user->doctor->subjects()->attach($request->subjects);
         }
 
-        Session::flash('message', 'بیمار جدید با موفقیت اضافه شد.');
-        return redirect()->route('admin.patients.index');
+        Session::flash('message', 'پزشک جدید با موفقیت اضافه شد.');
+        return redirect()->route('admin.doctors.index');
 
     }
 
@@ -82,10 +82,13 @@ class DoctorController extends Controller
     private function userInputs($request)
     {
         return [
-            'first_name' => $request->validated('first_name'),
-            'last_name'  => $request->validated('last_name'),
-            'gender'     => $request->validated('gender'),
-            'email'      => $request->validated('email'),
+            'level'             => 'doctor',
+            'first_name'        => $request->validated('first_name'),
+            'last_name'         => $request->validated('last_name'),
+            'gender'            => $request->validated('gender'),
+            'email'             => $request->validated('email'),
+            'email_verified_at' => !is_null($request->validated('email')) ? now() : null,
+            'mobile_verified_at'=> now()
         ];
     }
 
