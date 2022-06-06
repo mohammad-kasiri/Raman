@@ -31,6 +31,17 @@ class DoctorController extends Controller
             ->with(['subjects'     => $subjects]);
     }
 
+    public function show($doctor_id)
+    {
+        $doctor = User::query()->with(['userSessions' => function ($query) {
+            return $query->select('created_at', 'ip_address', 'platform', 'browser', 'user_id')->latest()->take(User::PROFILE_SESSION_LIMIT - 2)->get();
+        }])->withCount('userSessions')->findOrFail($doctor_id);
+
+        return view('admin.users.doctors.show')->with([
+            'doctor' => $doctor
+        ]);
+    }
+
     public function store(StoreRequest $request)
     {
         $user = User::query()->create(
