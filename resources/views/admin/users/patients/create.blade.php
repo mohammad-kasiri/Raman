@@ -1,33 +1,17 @@
 @extends('admin.layout.master' , ['title' => 'افزودن بیمار جدید'])
 @section('title' , 'بیمار جدید')
 @section('subheader')
-    <!--begin::زیر هدر-->
-    <div class="subheader py-2 py-lg-4  subheader-solid " id="kt_subheader">
-        <div class=" container-fluid  d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
-            <!--begin::اطلاعات-->
-            <div class="d-flex align-items-center flex-wrap mr-2">
-                <!--begin::Page Title-->
-                <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">افزودن بیمار جدید</h5>
-                <!--end::Page Title-->
-
-                <!--begin::اقدامات-->
-                <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-4 bg-gray-200"></div>
-                <!--end::اقدامات-->
-            </div>
-            <!--end::اطلاعات-->
-
-            <!--begin::Toolbar-->
-            <div class="d-flex align-items-center">
-                <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-4 bg-gray-200"></div>
-                <a href="{{route('admin.patients.index')}}" class="btn btn-light-warning font-weight-bolder btn-sm">
-                    <i class="fas fa-undo icon-nm"></i>
-                    لیست بیماران
-                </a>
-            </div>
-            <!--end::Toolbar-->
-        </div>
-    </div>
-    <!--end::زیر هدر-->
+    @php
+        $buttons = [
+            [
+                'title'  =>  'لیست بیماران' ,
+                'icon'   =>  '<i class="fas fa-undo icon-nm"></i>' ,
+                'route'  =>  route('admin.patients.index') ,
+                'color'  =>  'btn-light-warning'
+             ],
+        ];
+    @endphp
+    <x-dashboard.subheader :links='$buttons' :title="'افزودن بیمار جدید'" />
 @endsection
 @section('content')
 <!--begin::Entry-->
