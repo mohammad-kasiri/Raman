@@ -75,18 +75,44 @@ class DoctorController extends Controller
 
     public function edit($doctor)
     {
-        $doctor = User::findOrFail($doctor);
-        $cities = Province::query()->cities()->get();
-
-        return view('admin.users.patients.edit')
-            ->with(['doctor' => $doctor])
-            ->with(['cities' => $cities]);
+        $doctor       = User::findOrFail($doctor);
+        $subjects     = Subject::query()->orderBy('title' , 'ASC')->get();
+        $socialMedias = SocialMedia::query()->get();
+        return view('admin.users.doctors.edit')
+            ->with(['doctor'       => $doctor])
+            ->with(['socialMedias' => $socialMedias])
+            ->with(['subjects'     => $subjects]);
     }
 
     public function update(UpdateRequest $request , User $doctor)
     {
-        $doctor->update();
-        return redirect()->route('admin.doctor.show', $doctor->id);
+        //Update User
+        $doctor->update($this->userInputs($request));
+
+
+        //Update User Social Medias
+        if(isset($request->socialMedia) && count($request->socialMedia) > 0)
+        {
+            foreach ($request->socialMedia as $key => $social)
+            {
+                $doctor->socialMedias()->detach($key);
+                if (!is_null($social))
+                {
+                    $doctor->socialMedias()->attach($key ,  ['link' => $social]);
+                }
+            }
+        }
+
+        //Update One To One RelationShip  User -> Doctor
+        $doctor->doctor()->update($this->doctorInputs($request));
+
+        //Update Many To Many Doctor -> Subjects
+        if(isset($request->subjects) && is_array($request->subjects) && count($request->subjects) > 0)
+        {
+            $doctor->doctor->subjects()->sync($request->subjects);
+        }
+
+        return redirect()->route('admin.doctors.show', $doctor->id);
     }
 
 
