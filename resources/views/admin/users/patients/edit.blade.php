@@ -160,7 +160,7 @@
                                         </div>
                                         <div>
                                             <button type="submit" class="btn btn-success font-weight-bold text-uppercase px-9 py-4" data-wizard-type="action-submit">
-                                                ذخیره ی کاربر
+                                                ثبت تغییرات
                                             </button>
                                             <button type="button" class="btn btn-primary font-weight-bold text-uppercase px-9 py-4" data-wizard-type="action-next">
                                                 گام بعد
