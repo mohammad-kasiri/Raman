@@ -32,6 +32,5 @@ class SubjectSeeder extends Seeder
     public function run()
     {
         DB::table('subjects')->upsert($this->datas , ['title']);
-
     }
 }

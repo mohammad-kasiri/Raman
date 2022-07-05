@@ -22,7 +22,7 @@ class Doctor extends Model
 
     public function subjects()
     {
-        return $this->belongsToMany(Subject::class, 'doctor_Subject', 'doctor_id', 'subject_id');
+        return $this->belongsToMany(Subject::class, 'doctor_subject', 'doctor_id', 'subject_id');
     }
 
     public function jalaliFirstDayOfWork()
