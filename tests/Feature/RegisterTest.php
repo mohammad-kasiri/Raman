@@ -243,7 +243,8 @@ class RegisterTest extends TestCase
             "notifiable_id"   => $admins[2]->id,
         ]);
 
-        auth()->loginUsingId(1);
+        auth()->loginUsingId($admins[0]->id);
+
         $response = $this->get(route('admin.index'));
         $response->assertSee('کاربرجدید با نام');
 
