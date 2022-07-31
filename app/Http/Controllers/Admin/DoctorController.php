@@ -61,6 +61,7 @@ class DoctorController extends Controller
             }
         }
 
+        $user->setAvatar();
         $user->doctor()->create($this->doctorInputs($request));
 
         if(isset($request->subjects) && is_array($request->subjects) && count($request->subjects) > 0)
@@ -103,6 +104,7 @@ class DoctorController extends Controller
             }
         }
 
+        $doctor->setAvatar();
         //Update One To One RelationShip  User -> Doctor
         $doctor->doctor()->update($this->doctorInputs($request));
 

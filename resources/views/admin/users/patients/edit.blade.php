@@ -86,7 +86,7 @@
                         <div class="row justify-content-center my-10 px-8 my-lg-15 px-lg-10">
                             <div class="col-xl-12 col-xxl-7">
                                 <!--begin::Form ویزارد Form-->
-                                <form class="form" action="{{route('admin.patients.update' , $patient->id)}}" method="post">
+                                <form class="form" action="{{route('admin.patients.update' , $patient->id)}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 @method('PATCH')
                                 <!--begin::Form ویزارد گام 1-->
@@ -102,6 +102,12 @@
                                                     <x-dashboard.form.radio.button label="آقا" name="gender" value="male" color="danger" checked="{{$patient->gender == 'male'}}"/>
                                                     <x-dashboard.form.radio.button label="خانم" name="gender" value="female" color="success"  checked="{{$patient->gender == 'female'}}"/>
                                                 </x-dashboard.form.radio.row>
+                                                <x-dashboard.form.file.image
+                                                    name="avatar"
+                                                    label="تصویر پروفایل"
+                                                    id="doctor_avatar"
+                                                    default_image="{{$patient->avatar()}}"
+                                                />
                                             </div>
                                         </div>
                                     </div>

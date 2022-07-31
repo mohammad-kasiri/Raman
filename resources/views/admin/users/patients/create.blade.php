@@ -79,7 +79,7 @@
                     <div class="row justify-content-center my-10 px-8 my-lg-15 px-lg-10">
                         <div class="col-xl-12 col-xxl-7">
                             <!--begin::Form ویزارد Form-->
-                            <form class="form" action="{{route('admin.patients.store')}}" method="post">
+                            <form class="form" action="{{route('admin.patients.store')}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <!--begin::Form ویزارد گام 1-->
                                 <div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
@@ -94,6 +94,12 @@
                                                 <x-dashboard.form.radio.button label="آقا" name="gender" value="male" color="danger"/>
                                                 <x-dashboard.form.radio.button label="خانم" name="gender" value="female" color="success"/>
                                             </x-dashboard.form.radio.row>
+                                            <x-dashboard.form.file.image
+                                                name="avatar"
+                                                label="تصویر پروفایل"
+                                                id="doctor_avatar"
+                                                default_image="{{asset('images/static/avatars/male/1.png')}}"
+                                            />
                                         </div>
                                     </div>
                                 </div>

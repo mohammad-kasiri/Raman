@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Patient;
 
+use App\Models\Province;
 use App\Rules\PhoneNumber;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -31,7 +32,7 @@ class StoreRequest extends FormRequest
             'mobile'          => ['required' , new PhoneNumber() , 'unique:users,mobile' , 'bail'] ,
             'gender'          => ['required' , Rule::in(['male' , 'female']), 'bail'],
             'email'           => ['nullable' , 'email' , 'unique:users,email' , 'bail'],
-            'city_id'         => ['nullable' , 'numeric'  , 'min:32' , 'max:458'],
+            'city_id'         => ['nullable' , 'numeric'  , 'min:'.Province::FIRST_CITY_ID , 'max:'. Province::LAST_CITY_ID],
             'address'         => ['nullable' , 'max:180'],
             'password'        => ['nullable' , 'min:4' , 'max:20' , 'confirmed'],
             'career'          => ['nullable' , 'max:30'],
@@ -39,6 +40,7 @@ class StoreRequest extends FormRequest
             'study_field'     => ['nullable' , 'max:30'],
             'marital_status'  => ['nullable' , 'max:30'],
             'birthdate'       => ['nullable' , 'min:10' , 'max:10'],
+            'avatar'          => ['nullable' , 'image'  , 'max:2048']
         ];
     }
 }

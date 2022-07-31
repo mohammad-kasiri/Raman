@@ -38,6 +38,7 @@ class UpdateRequest extends FormRequest
             'degree'          => ['nullable' , 'max:30'],
             'study_field'     => ['nullable' , 'max:30'],
             'birthdate'       => ['nullable' , 'min:10' , 'max:10'],
+            'avatar'          => ['nullable' , 'image'  , 'max:2048']
         ];
     }
 }

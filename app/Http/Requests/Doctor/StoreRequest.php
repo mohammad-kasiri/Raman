@@ -42,7 +42,7 @@ class StoreRequest extends FormRequest
             'educational_background'    =>      ['nullable' , 'string' , 'max:600'],
             'working_background'        =>      ['nullable' , 'string' , 'max:600'],
             'first_day_of_work'         =>      ['nullable' , 'min:10' , 'max:10'],
-            'avatar'                    =>      ['nullable' , 'image' , 'max:2048']
+            'avatar'                    =>      ['nullable' , 'image'  , 'max:2048']
         ];
     }
 }

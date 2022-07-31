@@ -52,6 +52,7 @@ class PatientController extends Controller
                 ]
             )
         );
+        $user->setAvatar();
         $user->patient()->create($this->patientInputs($request));
         Session::flash('message', 'بیمار جدید با موفقیت اضافه شد.');
         return redirect()->route('admin.patients.index');
@@ -70,6 +71,7 @@ class PatientController extends Controller
     public function update(UpdateRequest $request, User $patient)
     {
         $patient->update($this->userInputs($request));
+        $patient->setAvatar();
         $patient->patient->update($this->patientInputs($request));
         Session::flash('message', 'تغییرات با موفقیت انجام شد');
         return redirect()->route('admin.patients.show', $patient->id);

@@ -9,12 +9,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Morilog\Jalali\Jalalian;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class User extends Authenticatable
+class User extends Authenticatable implements HasMedia
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, InteractsWithMedia;
 
-    const AVATAR_PATH = "/images/avatar/";
     const PAGINATION_LIMIT = 20;
     const PROFILE_SESSION_LIMIT = 6;
 
@@ -28,7 +29,6 @@ class User extends Authenticatable
         'gender',
         'first_name',
         'last_name',
-        'avatar',
         'mobile',
         'email',
         'password',
@@ -101,6 +101,11 @@ class User extends Authenticatable
         return $query->where('level', '=', 'doctor');
     }
 
+    public function scopeAdmins($query)
+    {
+        return $query->where('level', '=', 'admin');
+    }
+
     public function scopePatientsWithDetail($query)
     {
         return $query->where('level', '=', 'patient')->with('patient');
@@ -116,11 +121,12 @@ class User extends Authenticatable
         return Jalalian::forge($this->created_at)->format('%A, %d %B %Y');
     }
 
-    public function avatar()
+    public function avatar($collection = 'avatar')
     {
-        return
-            $this->avatar != null && file_exists(public_path(User::AVATAR_PATH . $this->avatar))
-                ? public_path(User::AVATAR_PATH . $this->avatar)
+        return  (strlen($this->getFirstMedia($collection)?->getUrl()) > 0
+                &&
+                file_exists( $this->getFirstMedia($collection)->getUrl()))
+                ? $this->getFirstMedia($collection)->getUrl()
                 : Avatar::{$this->gender}();
     }
 
@@ -147,4 +153,12 @@ class User extends Authenticatable
         return !!$role->intersect($this->roles)->count();
     }
 
+    public function setAvatar()
+    {
+        if (request()->hasFile('avatar')) {
+            $this->media()->delete();
+            $this->addMediaFromRequest('avatar')
+                ->toMediaCollection('avatar');
+        }
+    }
 }
