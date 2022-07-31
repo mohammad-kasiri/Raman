@@ -108,5 +108,8 @@ return array(
         "mobile"              =>       "تلفن همراه",
         "password"            =>       "پسورد",
         "verification_code"   =>       "کد تایید",
+
+        "label"               =>       "عنوان",
+        "description"         =>       "توضیحات",
     ),
 );
