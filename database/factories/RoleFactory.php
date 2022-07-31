@@ -18,7 +18,6 @@ class RoleFactory extends Factory
     public function definition()
     {
         return [
-            'name'        => Str::random(10),
             'label'       => Str::random(10),
             'description' => Str::random(10)
         ];
@@ -28,7 +27,6 @@ class RoleFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             return [
-                'name'        => 'full admin',
                 'label'       => 'مدیر ارشد',
                 'description' => 'تمامی دسترسی ها را دارد'
             ];

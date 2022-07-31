@@ -18,7 +18,8 @@ class PermissionSeeder extends Seeder
     {
         return   Arr::collapse([
             $this->patientPermissions() ,
-            $this->doctorPermissions()
+            $this->doctorPermissions(),
+            $this->permissionList()
         ]);
     }
 
@@ -103,6 +104,50 @@ class PermissionSeeder extends Seeder
                 'name'     => 'doctors.session.index' ,
                 'label'    => 'نمایش لیست نشست های پزشک'
             ],
+
+        ];
+    }
+
+    public function permissionList () : array
+    {
+        return [
+            [
+                'id'       => 13 ,
+                'parent'   => null ,  // -- without parent -- //
+                'name'     => 'roles' ,
+                'label'    => 'دسترسی ها'
+            ],
+            [
+                'id'       => 14 ,
+                'parent'   => 13 ,   //roles
+                'name'     => 'roles.users.index' ,
+                'label'    => 'مشاهده نقش کاربران'
+            ],
+            [
+                'id'       => 15 ,
+                'parent'   => 13 ,   //roles
+                'name'     => 'roles.users.edit' ,
+                'label'    => 'ویرایش نقش کاربران'
+            ],
+            [
+                'id'       => 16 ,
+                'parent'   => 13 ,   //roles
+                'name'     => 'roles.index' ,
+                'label'    => 'مشاهده لیست نقش ها'
+            ],
+            [
+                'id'       => 17 ,
+                'parent'   => 13 ,   //roles
+                'name'     => 'roles.create' ,
+                'label'    => 'افزودن نقش جدید'
+            ],
+            [
+                'id'       => 18 ,
+                'parent'   => 13 ,   //roles
+                'name'     => 'roles.edit' ,
+                'label'    => 'ویرایش نقش ها'
+            ],
+
 
         ];
     }

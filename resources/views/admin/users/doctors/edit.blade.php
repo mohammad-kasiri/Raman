@@ -1,5 +1,5 @@
-@extends('admin.layout.master' , ['title' => 'افزودن پزشک جدید'])
-@section('title' , 'پزشک جدید')
+@extends('admin.layout.master' , ['title' => 'ویرایش پزشک'])
+@section('title' , 'ویرایش پزشک')
 @section('subheader')
     @can('doctors.create')
         @php

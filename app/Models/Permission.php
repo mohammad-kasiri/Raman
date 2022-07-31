@@ -16,4 +16,15 @@ class Permission extends Model
             'permission_id',
             'role_id');
     }
+
+    public function children()
+    {
+        return $this->hasMany(Permission::class, 'parent')->with('children');
+    }
+
+    public function scopeHierarchy($query)
+    {
+        return $query->where('parent' , null)->with('children');
+    }
+
 }
