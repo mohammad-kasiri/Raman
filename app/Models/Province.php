@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Province extends Model
 {
 
+    const FIRST_CITY_ID = 32;
+    const LAST_CITY_ID = 458;
+
     public function province()
     {
         return $this->belongsTo(Province::class, 'province_id');

@@ -58,10 +58,28 @@ class PatientControllerTest extends TestCase
             ->assertSee(Province::query()->cities()->get()->pluck('name')->toArray());
 
     }
-//    public function test_patient_store_method_works()
-//    {
-//
-//    }
+    public function test_patient_store_method_works()
+    {
+        $this->assertDatabaseCount('users' , 0);
+        $admin = FullAdmin::make();
+        $this->assertDatabaseCount('users' , 1);
+
+        $data = [
+            'first_name'      => 'mohammad' ,
+            'last_name'       => 'kasiri' ,
+            'mobile'          => generatePhone() ,
+            'gender'          => generateGender(),
+            'email'           => generateEmail(),
+            'city_id'         => generateCityId(),
+        ];
+        $response = $this->actingAs($admin)->post(route('admin.patients.store') , $data);
+        $response->assertRedirect(route('admin.patients.index'));
+        $this->assertDatabaseCount('users' , 2);
+        /*
+         *      [ user table --> patient table ]=> one to one relationship
+         */
+        $this->assertDatabaseCount('patients' , 1);
+    }
     public function test_patient_edit_method_works()
     {
         $admin = FullAdmin::make();    // Here 1 Admin Created
